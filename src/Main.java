@@ -80,15 +80,15 @@ public class Main {
             Thread.sleep(300);
         }
 
-        System.out.println("\n Inserting 5 at the HEAD\n");
+        System.out.println("Inserting 5 at the HEAD\n");
         list.insertAtHead(5);
         Thread.sleep(300);
 
-        System.out.println("\n Searching for 30\n");
+        System.out.println("Searching for 30\n");
         list.search(30);
         Thread.sleep(300);
 
-        System.out.println("\n Deleting 30\n");
+        System.out.println("Deleting 30\n");
         list.delete(30);
         pause();
     }
@@ -109,11 +109,11 @@ public class Main {
             Thread.sleep(300);
         }
 
-        System.out.println("\n Peeking at top\n");
+        System.out.println("Peeking at top\n");
         st.peek();
         Thread.sleep(300);
 
-        System.out.println("\n Popping 3 elements\n");
+        System.out.println(" Popping 3 elements\n");
         for (int i = 0; i < 3; i++) {
             st.pop();
             Thread.sleep(300);
@@ -131,7 +131,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         while (true) {
             QueueDemo.Animator.clear();
-            System.out.println("=== QueueDemo - Pick a data structure ===\n");
+            System.out.println("=== QueueDemo - Pick a Queue ===\n");
             System.out.println("1. Simple Array Queue");
             System.out.println("2. Circular Queue");
             System.out.println("3. Linked-List Queue");
@@ -151,14 +151,14 @@ public class Main {
                 default: continue;
             }
 
-            // initial print
+            
             if (active != null) active.printState(); else activeDeque.printState();
             QueueDemo.Animator.sleep(300);
 
             
             while (true) {
                 System.out.println();
-                System.out.print("queue> ");
+                System.out.print("queue -> ");
                 String line = sc.nextLine().trim();
                 if (line.equalsIgnoreCase("exit") || line.equalsIgnoreCase("back")) break;
                 if (line.equalsIgnoreCase("help")) { printHelp(); continue; }
@@ -181,21 +181,21 @@ public class Main {
                     for (int v : vals) activeDeque.enqueueOne(v);
                     }
 
-    } else if (lower.startsWith("dequeue")) {
+                    } else if (lower.startsWith("dequeue")) {
 
-        Integer out = (active != null)
+                    Integer out = (active != null)
                       ? active.dequeueOne()
                       : activeDeque.dequeueOne();
 
-        if (out != null) System.out.println("Dequeued: " + out);
+                    if (out != null) System.out.println("Dequeued: " + out);
 
-    } else if (lower.startsWith("peek")) {
+                    } else if (lower.startsWith("peek")) {
 
-        Integer p = (active != null)
+                     Integer p = (active != null)
                     ? active.peek()
                     : activeDeque.peek();
 
-        System.out.println("Peek: " + (p == null ? "<empty>" : p));
+                    System.out.println("Peek: " + (p == null ? "<empty>" : p));
 
     } else if (lower.startsWith("pushfront")) {
 
@@ -205,7 +205,7 @@ public class Main {
         }
 
         List<Integer> vs =
-            parseValues(line.replaceFirst("(?i)pushfront", "enqueue"));
+            parseValues(line.replaceFirst("(i)pushfront", "enqueue"));
 
         for (int v : vs) activeDeque.pushFront(v);
 
@@ -221,25 +221,26 @@ public class Main {
 
     } else if (lower.startsWith("clear")) {
 
-        // reset structure by recreating
-        if (active instanceof QueueDemo.SimpleQueue) {
-            active = new QueueDemo.SimpleQueue(10);
-        } else if (active instanceof QueueDemo.CircularQueue) {
-            active = new QueueDemo.CircularQueue(10);
-        } else if (active instanceof QueueDemo.LinkedQueue) {
-            active = new QueueDemo.LinkedQueue();
-        } else if (activeDeque != null) {
-            activeDeque = new QueueDemo.Deque(0);
-        }
+        
+            if (active instanceof QueueDemo.SimpleQueue) {
+                active = new QueueDemo.SimpleQueue(10);
+            } else if (active instanceof QueueDemo.CircularQueue) {
+                active = new QueueDemo.CircularQueue(10);
+            } else if (active instanceof QueueDemo.LinkedQueue) {
+                active = new QueueDemo.LinkedQueue();
+            } else if (activeDeque != null) {
+                activeDeque = new QueueDemo.Deque(0);
+            }
 
-    } else {
+            } else {
 
-        System.out.println("Unknown command. Type 'help' for commands.");
-    }
-
-} catch (Exception ex) {
-    System.out.println("Error: " + ex.getMessage());
-}
+             System.out.println("Unknown command. Type 'help' for commands.");
+             QueueDemo.Animator.sleep(1500);
+            }
+            } 
+            catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            }
 
 
                 // print current state after each command
@@ -333,9 +334,9 @@ public class Main {
     // ==================== GRAPH DEMO ====================
     static void demoGraph() throws Exception {
         ConsoleUtils.clearScreen();
-        System.out.println("╔═══════════════════════════════════════════════════════════════╗");
-        System.out.println("║                Visual Graph Demo (BFS and DFS)                ║");
-        System.out.println("╚═══════════════════════════════════════════════════════════════╝\n");
+        System.out.println("╔═══════════════════════════════════════╗");
+        System.out.println("║                Graph Demo             ║");
+        System.out.println("╚═══════════════════════════════════════╝\n");
 
         Graph graph = new Graph(6);
         System.out.println(" Building graph with edges:\n");
@@ -415,34 +416,29 @@ public class Main {
 
         int[] arr = {10, 45, 23, 51, 19, 8, 34};
         int[] sortedArr = arr.clone();
-        SortingAlgorithms.quickSort(sortedArr);
+        java.util.Arrays.sort(sortedArr);
 
         System.out.println("Unsorted Array:");
-        SearchingAlgorithms.printArray(arr);
-        Thread.sleep(400);
+        SortingAlgorithms.printArray(arr);
+        Thread.sleep(500);
+
+        // Use the cursor-based demos for visible step-by-step searching
+        System.out.println("\nLinear Search (cursor demo) for 19:");
+        SearchingAlgorithms.linearSearchNoClear(arr, 19);
+        Thread.sleep(500);
+
+        System.out.println("\nBinary Search (cursor demo) for 51 on sorted array:");
+        SearchingAlgorithms.binarySearchNoClear(sortedArr, 51);
+        Thread.sleep(500);
 
         System.out.println("\nSorted Array:");
-        SearchingAlgorithms.printArray(sortedArr);
+        SortingAlgorithms.printArray(sortedArr);
         Thread.sleep(400);
-
-        int[] targets = {19, 51, 100};
-
-        System.out.println("\nLinear Search (on unsorted array):");
-        for (int target : targets) {
-            int index = SearchingAlgorithms.linearSearch(arr, target);
-            SearchingAlgorithms.printSearchResult(arr, target, index);
-            Thread.sleep(400);
-        }
-
-        System.out.println("\nBinary Search (on sorted array):");
-        for (int target : targets) {
-            int index = SearchingAlgorithms.binarySearch(sortedArr, target);
-            SearchingAlgorithms.printSearchResult(sortedArr, target, index);
-            Thread.sleep(400);
-        }
 
         pause();
     }
+
+    
 
     // ==================== UTILITIES ====================
 
